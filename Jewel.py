@@ -21,6 +21,7 @@ async def on_ready():
     print(bot.user.name + ' is up and ready to serve ' + Util.get_size(bot.guilds) + ' guilds!')
     print('------------------------------------------------')
 
+
 if token is not None:
     bot.run(token)
     token = None
