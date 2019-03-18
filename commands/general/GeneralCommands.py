@@ -1,5 +1,7 @@
 from discord.ext import commands
 from Util import get_size
+import discord
+import datetime
 
 
 class General(commands.Cog):
@@ -33,3 +35,54 @@ class General(commands.Cog):
         await ctx.send(
             'Here is my invite URL' + ctx.author.mention + '! <https://discordapp.com/oauth2/authorize?client_id=' + str(
                 self.bot.user.id) + '&scope=bot&permissions=0>')
+
+    @commands.command(
+        name='embed',
+        aliases=['example_embed'],
+        description='Get an example embed to see what each part of an embed does'
+    )
+    async def example_embed(self, ctx):
+        """Get an example embed"""
+        embed = discord.Embed(
+            title='Title',
+            description='Description\nThe title leads to the URL, if given.',
+            url='https://www.google.com/',
+            color=discord.Color.dark_blue(),
+            timestamp=datetime.datetime.today()
+        )
+        embed.set_author(
+            name='Author name (Can point to URL)',
+            icon_url='https://discordapp.com/assets/28174a34e77bb5e5310ced9f95cb480b.png'
+        )
+        embed.set_image(
+            url='https://media.discordapp.net/attachments/237757030708936714/390520880242884608/8xAac.png?width=508&height=522'
+        )
+        embed.set_thumbnail(
+            url='https://i.imgur.com/sm9JTa9.png')
+        embed.add_field(
+            name='Field Name',
+            value='Color sets\n< that ',
+            inline=True
+        )
+        embed.add_field(
+            name='Field Name',
+            value='Another split field',
+            inline=True
+        )
+        embed.add_field(
+            name='Field Name',
+            value='Split is also called inline',
+            inline=True
+        )
+        embed.add_field(
+            name='Non-Inline Field Name',
+            value='The number of fields that can be shown on the same row is limited to 3, but is limited to 2 when a '
+                  'image is included',
+            inline=False
+        )
+        embed.set_footer(
+            text='Footer-text',
+            icon_url='https://i.imgur.com/sm9JTa9.png'
+        )
+
+        await ctx.send(embed=embed)
